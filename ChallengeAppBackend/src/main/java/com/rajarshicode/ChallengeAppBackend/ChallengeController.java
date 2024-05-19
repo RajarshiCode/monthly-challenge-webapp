@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,8 +15,7 @@ public class ChallengeController {
     private ChallengeService challengeService;
     public ChallengeController(ChallengeService challengeService){
         this.challengeService = challengeService;
-        //commit check
-        //why not once more
+
     }
 
 

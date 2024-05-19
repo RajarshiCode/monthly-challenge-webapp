@@ -1,8 +1,11 @@
 package com.rajarshicode.ChallengeAppBackend;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ChallengeService {
 
     private List<Challenge> challenges = new ArrayList<>();
