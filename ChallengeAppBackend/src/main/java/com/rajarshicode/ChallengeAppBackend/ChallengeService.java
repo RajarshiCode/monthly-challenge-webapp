@@ -10,9 +10,13 @@ public class ChallengeService {
 
     private List<Challenge> challenges = new ArrayList<>();
 
+    private Long nextId = 1L;
+
+
+
+
     public ChallengeService(){
-        Challenge challenge1 = new Challenge(1L, "May", "learn german");
-        challenges.add(challenge1);
+        
     }
 
     public List<Challenge> getAllChallenges(){
@@ -21,6 +25,7 @@ public class ChallengeService {
 
     public boolean addChallenge(Challenge challenge){
         if (challenge != null){
+            challenge.setId(nextId++);
             challenges.add(challenge);
             return true;
         }else {
