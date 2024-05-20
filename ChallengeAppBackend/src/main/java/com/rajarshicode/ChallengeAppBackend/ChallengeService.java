@@ -55,4 +55,9 @@ public class ChallengeService {
 
 
     }
+
+    public boolean deleteChallenge(Long id) {
+        //using lambda expression for delete feature
+        return challenges.removeIf(challenge -> challenge.getId().equals(id));
+    }
 }
