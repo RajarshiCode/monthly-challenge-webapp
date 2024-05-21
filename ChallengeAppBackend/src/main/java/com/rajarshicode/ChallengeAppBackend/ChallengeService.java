@@ -8,6 +8,7 @@ import java.util.List;
 @Service
 public class ChallengeService {
 
+    //memory exists only till the application is running.
     private List<Challenge> challenges = new ArrayList<>();
 
     private Long nextId = 1L;
