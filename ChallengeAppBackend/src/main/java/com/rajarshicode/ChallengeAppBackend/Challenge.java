@@ -13,6 +13,9 @@ public class Challenge {
     private String month;
     private String description;
 
+    public Challenge() {
+    }
+
     public Long getId() {
         return id;
     }
