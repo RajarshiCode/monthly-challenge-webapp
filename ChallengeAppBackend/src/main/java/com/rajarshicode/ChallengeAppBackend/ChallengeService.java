@@ -3,14 +3,14 @@ package com.rajarshicode.ChallengeAppBackend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ChallengeService {
 
     //memory exists only till the application is running.
-    private List<Challenge> challenges = new ArrayList<>();
+    //private List<Challenge> challenges = new ArrayList<>();
 
     private Long nextId = 1L;
 
@@ -22,7 +22,7 @@ public class ChallengeService {
     }
 
     public List<Challenge> getAllChallenges(){
-        return challenges;
+        return challengeRepository.findAll();
     }
 
     public boolean addChallenge(Challenge challenge){
@@ -37,30 +37,32 @@ public class ChallengeService {
     }
 
     public Challenge getChallenge(String month) {
-        for (Challenge challenge: challenges) {
-            if (challenge.getMonth().equalsIgnoreCase(month)){
-                return challenge;
-            }
-        }
-        return null;
+
+        Optional<Challenge> challenge = challengeRepository.findByMonthIgnoreCase(month);
+
+        return challenge.orElse(null);
     }
 
     public boolean updateChallenge(Long id, Challenge updatedChallenge) {
 
-        for (Challenge challenge: challenges) {
-            if (challenge.getId().equals(id)){
-                challenge.setMonth(updatedChallenge.getMonth());
-                challenge.setDescription(updatedChallenge.getDescription());
-                return true;
-            }
+        Optional<Challenge> challenge = challengeRepository.findById(id);
+
+        if (challenge.isPresent()){
+            Challenge challengeToUpdate = challenge.get();
+            challengeToUpdate.setMonth(updatedChallenge.getMonth());
+            challengeToUpdate.setDescription(updatedChallenge.getDescription());
+            challengeRepository.save(challengeToUpdate);
+            return true;
         }
         return false;
-
-
     }
 
     public boolean deleteChallenge(Long id) {
-        //using lambda expression for delete feature
-        return challenges.removeIf(challenge -> challenge.getId().equals(id));
+        Optional<Challenge> challenge = challengeRepository.findById(id);
+        if (challenge.isPresent()){
+            challengeRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
