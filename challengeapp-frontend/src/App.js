@@ -4,6 +4,7 @@ import './App.css';
 import ChallengeList from './components/ChallengeList';
 import axios from 'axios';
 import AddChallenge from './components/AddChallenge';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -34,14 +35,16 @@ function App() {
   };
 
   return (
-    <div className="App">
-
-      <h1>Monthy Challenge</h1>
+    <div className="container mt-5 ">
+      
+      <h1 className='text-center mb-4 '>Monthy Challenge</h1>
       {/* <ChallengeList></ChallengeList> */}
-
+      <div className='container-fluid'>
       <AddChallenge onChallengeAdded={handleChallengeAdded}/>
 
       <ChallengeList challenges={challenges} />
+      </div>
+      
 
 
 
